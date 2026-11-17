@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>My Cozy Planner</title><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f8ff;--card:#ffffff;--ink:#3f5470;--mut:#7f96b3;--pink:#cfe3ff;--lav:#d9dcff;--mint:#c9f1f2;--sky:#bfe0ff;--peach:#d3ecf7;--lemon:#e4f1ff;--acc:#6fa8e8;--line:#dcebf9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f2a3a;--card:#293648;--ink:#e8f1ff;--mut:#a9bdd6;--pink:#3f5a80;--lav:#454a7a;--mint:#2f5f66;--sky:#35607f;--peach:#3b5870;--lemon:#3a4f6d;--acc:#8fc0ff;--line:#38485e}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:'Lora',Georgia,serif;font-weight:500;min-height:100vh;padding-bottom:90px}
+h1,h2,h3{font-family:'Dancing Script','Brush Script MT',cursive;margin:0;font-weight:700}h3{font-size:24px}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+header h1{font-size:36px}.sub{color:var(--mut);font-size:13px}
+.card{background:var(--card);border-radius:22px;padding:16px;margin-bottom:14px;box-shadow:0 6px 18px rgba(111,168,232,.18);border:2px solid var(--line)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+input,textarea,select{font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:9px 12px;outline:none;max-width:100%}
+input:focus,textarea:focus,select:focus{border-color:var(--acc)}
+input[type=text],textarea{flex:1;min-width:140px}textarea{width:100%;min-height:90px;resize:vertical}
+button{font:inherit;border:0;border-radius:14px;padding:9px 14px;background:var(--lav);color:var(--ink);cursor:pointer;transition:transform .12s}
+button:hover{transform:translateY(-2px)}button.p{background:var(--acc);color:#fff}button.s{padding:4px 9px;font-size:13px;background:var(--pink)}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:2px solid var(--line);display:flex;justify-content:space-around;padding:8px 6px calc(8px + env(safe-area-inset-bottom,0px));z-index:5}
+nav button{background:none;display:flex;flex-direction:column;align-items:center;font-size:11px;padding:6px 8px;color:var(--mut)}nav button span{font-size:20px}
+nav button.on{background:var(--lav);color:var(--ink)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.chip{display:inline-block;border-radius:99px;padding:2px 10px;font-size:12px;background:var(--mint)}
+.task{display:flex;align-items:center;gap:10px;padding:10px;border-radius:16px;background:var(--bg);margin-bottom:8px}
+.task.done .t{text-decoration:line-through;opacity:.5}.task .t{flex:1}
+.task input{width:22px;height:22px;accent-color:#6fa8e8;padding:0}
+.pri1{background:var(--pink)}.pri2{background:var(--lemon)}.pri3{background:var(--mint)}
+.bar{height:14px;background:var(--bg);border-radius:99px;overflow:hidden;border:2px solid var(--line)}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--lav));border-radius:99px;transition:width .4s}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.dow{text-align:center;color:var(--mut);font-size:12px}
+.day{aspect-ratio:1;border-radius:14px;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:14px;cursor:pointer;position:relative;border:2px solid transparent}
+.day.out{opacity:.35}.day.today{background:var(--pink)}.day.sel{border-color:var(--acc)}
+.dots{display:flex;gap:2px;height:6px;margin-top:2px}.dots b{width:6px;height:6px;border-radius:50%;background:var(--acc)}.dots b.t{background:#6fd0d6}
+.note,.vis{border-radius:20px;padding:14px;position:relative;min-height:110px}
+.vis{text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px}.vis .e{font-size:38px}
+.x{position:absolute;top:6px;right:8px;background:none;padding:2px 6px;opacity:.5}
+.bars{display:flex;align-items:flex-end;gap:8px;height:130px}.bars div{flex:1;text-align:center;font-size:12px}.bars i{display:block;border-radius:10px 10px 4px 4px;background:linear-gradient(var(--lav),var(--pink));min-height:6px;margin-bottom:4px}
+a.gc{color:var(--acc);font-size:12px;text-decoration:none}
+.empty{color:var(--mut);text-align:center;padding:10px}
+.big{font-size:36px;font-family:'Dancing Script','Brush Script MT',cursive;font-weight:700}
+</style></head><body><div class="wrap">
+<header><div><h1>🌸 My Cozy Planner</h1><div class="sub" id="date"></div></div><div class="row"><button id="ics" class="s">📅 Export to Google Calendar</button><span class="sub" id="sv"></span></div></header>
+<main id="main"></main></div>
+<nav id="nav"></nav>
+<script>
+const COL=['var(--pink)','var(--lav)','var(--mint)','var(--sky)','var(--peach)','var(--lemon)'];
+const TABS=[['home','🏡','Home'],['cal','📅','Calendar'],['todo','✅','To-do'],['goals','🎯','Goals'],['notes','📝','Notes'],['vision','🌈','Vision'],['week','📊','Week']];
+let S={tasks:[],events:[],goals:[],notes:[],vision:[]},tab='home',sel=null,vm=new Date(),filt='open',db=null,docRef=null,tmr;
+const $=s=>document.querySelector(s),uid=()=>Math.random().toString(36).slice(2,9);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ymd=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const TODAY=ymd(new Date());sel=TODAY;
+const fmt=s=>s?new Date(s+'T00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'}):'';
+const val=id=>($('#'+id)||{}).value||'';
+function load(){try{const j=localStorage.getItem('cozy');if(j)S=Object.assign(S,JSON.parse(j))}catch(e){}}
+function save(){try{localStorage.setItem('cozy',JSON.stringify(S))}catch(e){}
+ clearTimeout(tmr);tmr=setTimeout(async()=>{if(!docRef)return;try{await docRef.set({json:JSON.stringify(S)});$('#sv').textContent='☁️ saved'}catch(e){$('#sv').textContent=''}},700)}
+function upd(){save();render()}
+async function initDb(){try{const u=await claude.use('user'),d=await claude.use('db');if(!u||!d)return;const id=await u.id();docRef=d.collection('data/users/'+id).doc('planner');
+ const snap=await docRef.get();if(snap.exists){const r=JSON.parse(snap.data().json);if(r&&(JSON.stringify(r)!==JSON.stringify(S))){const mine=S.tasks.length+S.events.length+S.goals.length+S.notes.length+S.vision.length;if(!mine||confirm('Load your saved planner from the cloud?')){S=Object.assign(S,r);render()}}$('#sv').textContent='☁️ synced'}else{save()}}catch(e){}}
+// actions
+const addTask=()=>{const t=val('nt').trim();if(!t)return;S.tasks.unshift({id:uid(),t,due:val('nd'),pri:+val('np')||2,done:false});upd()};
+const togg=id=>{const k=S.tasks.find(x=>x.id==id);k.done=!k.done;k.doneAt=k.done?TODAY:null;upd()};
+const del=(c,id)=>{S[c]=S[c].filter(x=>x.id!=id);upd()};
+const addEv=()=>{const t=val('et').trim();if(!t)return;S.events.push({id:uid(),t,date:sel,start:val('es'),end:val('ee')});upd()};
+const addGoal=()=>{const t=val('gt').trim();if(!t)return;S.goals.push({id:uid(),t,target:+val('gg')||1,cur:0,unit:val('gu'),due:val('gd'),e:val('ge')||'⭐'});upd()};
+const bump=(id,n)=>{const g=S.goals.find(x=>x.id==id);g.cur=Math.max(0,g.cur+n);upd()};
+const addNote=()=>{S.notes.unshift({id:uid(),title:'',body:'',c:Math.floor(Math.random()*6)});upd()};
+const setNote=(id,k,v)=>{S.notes.find(x=>x.id==id)[k]=v;save()};
+const addVis=()=>{const t=val('vt').trim();if(!t)return;S.vision.push({id:uid(),t,e:val('ve')||'✨',c:S.vision.length%6});upd()};
+// google calendar
+const cl=e=>{const d=e.date.replace(/-/g,'');const a=e.start?d+'T'+e.start.replace(':','')+'00':d;
+ let b=e.end?d+'T'+e.end.replace(':','')+'00':e.start?a:ymd(new Date(new Date(e.date+'T00:00').getTime()+864e5)).replace(/-/g,'');
+ return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(e.t)+'&dates='+a+'/'+b};
+async function exportIcs(){const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Cozy Planner//EN'];
+ const ev=(id,s,e,t,allDay)=>L.push('BEGIN:VEVENT','UID:'+id+'@cozy','DTSTAMP:'+new Date().toISOString().replace(/[-:]|\.\d+/g,''),allDay?'DTSTART;VALUE=DATE:'+s:'DTSTART:'+s,allDay?'DTEND;VALUE=DATE:'+e:'DTEND:'+e,'SUMMARY:'+t.replace(/[,;]/g,' '),'END:VEVENT');
+ const nx=s=>ymd(new Date(new Date(s+'T00:00').getTime()+864e5)).replace(/-/g,'');
+ S.events.forEach(e=>{const d=e.date.replace(/-/g,'');e.start?ev(e.id,d+'T'+e.start.replace(':','')+'00',d+'T'+(e.end||e.start).replace(':','')+'00',e.t):ev(e.id,d,nx(e.date),e.t,1)});
+ S.tasks.filter(t=>t.due&&!t.done).forEach(t=>ev(t.id,t.due.replace(/-/g,''),nx(t.due),'To-do: '+t.t,1));
+ S.goals.filter(g=>g.due).forEach(g=>ev(g.id,g.due.replace(/-/g,''),nx(g.due),'Goal deadline: '+g.t,1));
+ L.push('END:VCALENDAR');const blob=new Blob([L.join('\r\n')],{type:'text/calendar'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cozy-planner.ics';document.body.appendChild(a);a.click();a.remove()}
+// views
+const taskRow=t=>`<div class="task ${t.done?'done':''}"><input type="checkbox" ${t.done?'checked':''} onchange="togg('${t.id}')"><span class="t">${esc(t.t)}</span>${t.due?`<span class="chip pri${t.pri}" style="${!t.done&&t.due<TODAY?'background:var(--peach)':''}">${fmt(t.due)}</span>`:''}<button class="s" onclick="del('tasks','${t.id}')">✕</button></div>`;
+const evRow=e=>`<div class="task"><span class="t">📌 ${esc(e.t)} <span class="sub">${e.start?e.start+(e.end?'–'+e.end:''):'all day'}</span></span><a class="gc" target="_blank" rel="noopener" href="${cl(e)}">+ Google Cal</a><button class="s" onclick="del('events','${e.id}')">✕</button></div>`;
+const V={
+home(){const te=S.events.filter(e=>e.date==TODAY),tt=S.tasks.filter(t=>!t.done&&t.due&&t.due<=TODAY),up=S.tasks.filter(t=>!t.done&&t.due>TODAY).sort((a,b)=>a.due>b.due?1:-1).slice(0,5),gs=S.goals.slice(0,6),any=S.tasks.filter(t=>!t.done&&!t.due).slice(0,8);
+ const h=new Date().getHours();return `<div class="card" style="background:var(--pink)"><div class="big">${h<12?'Good morning':h<18?'Good afternoon':'Good evening'}, lovely ✨</div><div class="sub" style="color:inherit">${tt.length} to-dos due · ${te.length} events today</div></div>
+ <div class="card"><h3>Quick add</h3><div class="row" style="margin-top:8px"><input type="text" id="nt" placeholder="New to-do…"><input type="date" id="nd" value="${TODAY}"><button class="p" onclick="addTask()">Add</button></div></div>
+ <div class="card"><h3>Today 🌤️</h3>${te.map(evRow).join('')}${tt.map(taskRow).join('')||''}${te.length+tt.length?'':'<div class="empty">Nothing planned — enjoy! 🍵</div>'}</div>
+ <div class="card"><h3>Coming up 🗓️</h3>${up.map(taskRow).join('')||'<div class="empty">No upcoming deadlines</div>'}</div>
+ <div class="card"><h3>Anytime to-dos 🌼</h3>${any.map(taskRow).join('')||'<div class="empty">No undated to-dos</div>'}</div>
+ <div class="card"><h3>My goals 🎯</h3>${gs.map(g=>`<div style="margin:10px 0">${esc(g.e)} ${esc(g.t)} <span class="sub">${g.cur}/${g.target} ${esc(g.unit)}${g.due?' · by '+fmt(g.due):''}</span><div class="bar"><i style="width:${Math.min(100,g.cur/g.target*100)}%"></i></div></div>`).join('')||'<div class="empty">No goals yet — add one in the Goals tab 🌟</div>'}</div>`},
+cal(){const y=vm.getFullYear(),m=vm.getMonth(),f=new Date(y,m,1).getDay(),n=new Date(y,m+1,0).getDate();let c=['S','M','T','W','T','F','S'].map(d=>`<div class="dow">${d}</div>`).join('');
+ for(let i=0;i<f;i++)c+='<div></div>';for(let d=1;d<=n;d++){const s=ymd(new Date(y,m,d)),e=S.events.some(x=>x.date==s),t=S.tasks.some(x=>x.due==s&&!x.done);
+ c+=`<div class="day ${s==TODAY?'today':''} ${s==sel?'sel':''}" onclick="sel='${s}';render()">${d}<div class="dots">${e?'<b></b>':''}${t?'<b class="t"></b>':''}</div></div>`}
+ const ev=S.events.filter(e=>e.date==sel),ts=S.tasks.filter(t=>t.due==sel);
+ return `<div class="card"><div class="row" style="justify-content:space-between;margin-bottom:10px"><button onclick="vm=new Date(vm.getFullYear(),vm.getMonth()-1,1);render()">‹</button><h3>${vm.toLocaleDateString(undefined,{month:'long',year:'numeric'})}</h3><button onclick="vm=new Date(vm.getFullYear(),vm.getMonth()+1,1);render()">›</button></div><div class="cal">${c}</div><div class="sub" style="margin-top:8px">💙 events &nbsp; 🩵 to-do deadlines</div></div>
+ <div class="card"><h3>${fmt(sel)}</h3><div style="margin:8px 0">${ev.map(evRow).join('')}${ts.map(taskRow).join('')||''}${ev.length+ts.length?'':'<div class="empty">Free day 🌷</div>'}</div>
+ <div class="row"><input type="text" id="et" placeholder="Add event…"><input type="time" id="es"><input type="time" id="ee"><button class="p" onclick="addEv()">Add</button></div></div>`},
+todo(){const l=S.tasks.filter(t=>filt=='all'||(filt=='open'?!t.done:t.done)).sort((a,b)=>(a.due||'9')>(b.due||'9')?1:-1);
+ return `<div class="card"><div class="row"><input type="text" id="nt" placeholder="What needs doing?"><input type="date" id="nd"><select id="np"><option value="1">🔴 High</option><option value="2" selected>🟡 Medium</option><option value="3">🟢 Low</option></select><button class="p" onclick="addTask()">Add</button></div></div>
+ <div class="row" style="margin-bottom:10px">${['open','done','all'].map(f=>`<button class="${filt==f?'p':''}" onclick="filt='${f}';render()">${f}</button>`).join('')}</div><div class="card">${l.map(taskRow).join('')||'<div class="empty">All clear ✨</div>'}</div>`},
+goals(){return `<div class="card"><div class="row"><input type="text" id="ge" placeholder="🎯" style="width:60px;flex:0;min-width:60px"><input type="text" id="gt" placeholder="Goal (e.g. Read books)"><input type="number" id="gg" placeholder="Target" style="width:90px"><input type="text" id="gu" placeholder="unit" style="width:80px;flex:0;min-width:80px"><input type="date" id="gd"><button class="p" onclick="addGoal()">Add</button></div></div>
+ <div class="grid">${S.goals.map((g,i)=>{const p=Math.min(100,Math.round(g.cur/g.target*100));return `<div class="card" style="background:${COL[i%6]};margin:0"><div class="big">${esc(g.e)}</div><h3>${esc(g.t)}</h3><div class="sub" style="color:inherit">${g.cur}/${g.target} ${esc(g.unit)} ${g.due?'· by '+fmt(g.due):''}</div><div class="bar" style="margin:8px 0"><i style="width:${p}%"></i></div><div class="row"><button class="s" onclick="bump('${g.id}',-1)">−</button><b>${p}%</b><button class="s" onclick="bump('${g.id}',1)">+</button><button class="s" onclick="del('goals','${g.id}')">✕</button></div></div>`}).join('')||'<div class="empty">Set your first target 🌟</div>'}</div>`},
+notes(){return `<div class="row" style="margin-bottom:12px"><button class="p" onclick="addNote()">＋ New note</button></div><div class="grid">${S.notes.map(n=>`<div class="note" style="background:${COL[n.c]}"><button class="x" onclick="del('notes','${n.id}')">✕</button><input type="text" value="${esc(n.title)}" placeholder="Title" oninput="setNote('${n.id}','title',this.value)" style="background:transparent;border:0;width:90%;font-family:'Dancing Script',cursive;font-size:24px;font-weight:700;padding:2px"><textarea placeholder="Write here…" oninput="setNote('${n.id}','body',this.value)" style="background:transparent;border:0;min-height:100px">${esc(n.body)}</textarea></div>`).join('')||'<div class="empty">No notes yet 📝</div>'}</div>`},
+vision(){return `<div class="card"><div class="row"><input type="text" id="ve" placeholder="🌴" style="width:60px;flex:0;min-width:60px"><input type="text" id="vt" placeholder="A dream, word or quote…"><button class="p" onclick="addVis()">Pin it</button></div></div><div class="grid">${S.vision.map(v=>`<div class="vis" style="background:${COL[v.c]}"><button class="x" onclick="del('vision','${v.id}')">✕</button><div class="e">${esc(v.e)}</div><h3>${esc(v.t)}</h3></div>`).join('')||'<div class="empty">Pin what you’re dreaming of 🌈</div>'}</div>`},
+week(){const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return d}),cnt=days.map(d=>S.tasks.filter(t=>t.doneAt==ymd(d)).length),mx=Math.max(1,...cnt),tot=cnt.reduce((a,b)=>a+b,0),
+ wk=S.tasks.filter(t=>t.due&&t.due>=ymd(days[0])&&t.due<=TODAY),rate=wk.length?Math.round(wk.filter(t=>t.done).length/wk.length*100):0;
+ return `<div class="card"><h3>This week 📊</h3><div class="bars" style="margin-top:12px">${days.map((d,i)=>`<div><i style="height:${cnt[i]/mx*100}px"></i>${cnt[i]}<br>${'SMTWTFS'[d.getDay()]}</div>`).join('')}</div></div>
+ <div class="grid"><div class="card" style="background:var(--mint)"><div class="big">${tot}</div>tasks done</div><div class="card" style="background:var(--sky)"><div class="big">${rate}%</div>on-time rate</div><div class="card" style="background:var(--peach)"><div class="big">${S.events.filter(e=>e.date>=ymd(days[0])&&e.date<=TODAY).length}</div>events attended</div></div>
+ <div class="card"><h3>Goal progress 🎯</h3>${S.goals.map(g=>`<div style="margin:10px 0">${esc(g.e)} ${esc(g.t)}<div class="bar"><i style="width:${Math.min(100,g.cur/g.target*100)}%"></i></div></div>`).join('')||'<div class="empty">No goals yet</div>'}</div>`}};
+function render(){const a=document.activeElement&&document.activeElement.id;$('#main').innerHTML=V[tab]();$('#nav').innerHTML=TABS.map(t=>`<button class="${tab==t[0]?'on':''}" onclick="tab='${t[0]}';render()"><span>${t[1]}</span>${t[2]}</button>`).join('');
+ document.querySelectorAll('input[type=text]#nt,#et,#gt,#vt').forEach(i=>i.addEventListener('keydown',e=>{if(e.key=='Enter'){({nt:addTask,et:addEv,gt:addGoal,vt:addVis})[i.id]()}}))}
+$('#date').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
+$('#ics').onclick=exportIcs;load();render();
+</script></body></html>
